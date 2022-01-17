@@ -1,4 +1,5 @@
 import 'package:flodo/models/todo.dart';
+import 'package:flodo/pages/controller.dart';
 import 'package:flodo/pages/home.dart';
 import 'package:flodo/providers/todo_provider.dart';
 import 'package:flutter/material.dart';
@@ -33,6 +34,9 @@ class App extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: const Home(),
+      routes: {
+        "/add": (BuildContext context) => const Controller(mode: ControllerMode.add)
+      },
     );
   }
 }

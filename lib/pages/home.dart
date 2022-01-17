@@ -1,3 +1,4 @@
+import 'package:flodo/layouts/base_layout.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
@@ -5,15 +6,15 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Flodo"),
-      ),
+    return BaseLayout(
+      title: "Todo",
       body: const Center(
         child: Text("hello world !"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context, '/add');
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ), 
