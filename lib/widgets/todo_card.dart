@@ -3,21 +3,62 @@ import 'package:flutter/material.dart';
 
 class TodoCard extends StatelessWidget {
   final Todo todo;
+  final Function(Todo)? onTap;
+  final Function(Todo)? onTapDelete;
+  final Function(Todo)? onTapUpdate;
 
-  const TodoCard({Key? key, required this.todo}) : super(key: key);
+  const TodoCard({
+    Key? key, 
+    required this.todo, 
+    this.onTap,
+    this.onTapUpdate,
+    this.onTapDelete
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // Todo todo = context.select<TodoProvider, Todo>((data) => data.todos[position]);
-    return Card(
-      margin: const EdgeInsets.only(bottom: 16),
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(todo.name)
-          ],
+    return GestureDetector(
+      onTap: () {
+        onTap!(todo);
+      },
+      child: Card(
+        margin: const EdgeInsets.only(bottom: 16),
+        color: todo.isFinish ? Colors.grey[350] : Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                todo.name,
+                style: TextStyle(
+                  decoration: todo.isFinish ? TextDecoration.lineThrough : TextDecoration.none
+                ),
+              ),
+              DropdownButtonHideUnderline(
+                child: DropdownButton(
+                  icon: const Icon(Icons.more_vert),
+                  underline: Container(
+                    height: 0,
+                  ),
+                  items: <String>['Update', 'Delete'].map((e) {
+                    return DropdownMenuItem<String>(
+                      child: Text(e),
+                      value: e,
+                    );
+                  }).toList(), 
+                  onChanged: (value) {
+                    String status = value.toString().toLowerCase();
+                    if (status == 'update') {
+                      onTapUpdate!(todo);
+                    } else {
+                      onTapDelete!(todo);
+                    }
+                  }
+                ) 
+              )
+            ],
+          ),
         ),
       ),
     );
