@@ -23,4 +23,10 @@ class TodoProvider extends ChangeNotifier {
     notifyListeners();
     return this;
   }
+
+  TodoProvider delete(String id) {
+    _todos = _todos.where((todo) => todo.id != id).toList();
+    notifyListeners();
+    return this;
+  }
 }

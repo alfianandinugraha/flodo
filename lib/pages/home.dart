@@ -27,7 +27,7 @@ class Home extends StatelessWidget {
                   data.finish(todo.id);
                 },
                 onTapDelete: (todo) {
-                  print("Deleting ${todo.id}...");
+                  data.delete(todo.id);
                 },
                 onTapUpdate: (todo) {
                   print("Select ${todo.id}");
