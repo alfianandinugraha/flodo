@@ -11,4 +11,16 @@ class TodoProvider extends ChangeNotifier {
     notifyListeners();
     return this;
   }
+
+  TodoProvider finish(String id) {
+    _todos = _todos.map((e) {
+      if (id == e.id) {
+        e.isFinish = !e.isFinish;
+      }
+
+      return e;
+    }).toList();
+    notifyListeners();
+    return this;
+  }
 }
