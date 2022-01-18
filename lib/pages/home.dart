@@ -13,18 +13,29 @@ class Home extends StatelessWidget {
 
     return BaseLayout(
       title: "Todo",
-      body: Selector<TodoProvider, List<Todo>>(
+      body: Consumer<TodoProvider>(
         builder: (context, data, widget) {
           return ListView.builder(
-            itemCount: data.length,
+            itemCount: data.todos.length,
             itemBuilder: (BuildContext context, int position) {
-              Todo todo = data[position];
+              Todo todo = data.todos[position];
 
-              return TodoCard(todo: todo, key: Key(todo.id));
+              return TodoCard(
+                todo: todo, 
+                key: Key(todo.id),
+                onTap: (todo) {
+                  data.finish(todo.id);
+                },
+                onTapDelete: (todo) {
+                  print("Deleting ${todo.id}...");
+                },
+                onTapUpdate: (todo) {
+                  print("Select ${todo.id}");
+                },
+              );
             }
           );
         },
-        selector: (context, data) => data.todos
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
