@@ -2,6 +2,8 @@ import 'package:flodo/layouts/base_layout.dart';
 import 'package:flodo/models/todo.dart';
 import 'package:flodo/providers/todo_provider.dart';
 import 'package:flodo/widgets/todo_card.dart';
+import 'package:flodo/widgets/todo_empty_state.dart';
+import 'package:flodo/widgets/todo_list.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -13,40 +15,11 @@ class Home extends StatelessWidget {
 
     return BaseLayout(
       title: "Todo",
-      body: Consumer<TodoProvider>(
+      body: Selector<TodoProvider, bool>(
         builder: (context, data, widget) {
-          return data.todos.isEmpty ? (
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text("Todo not found", style: Theme.of(context).textTheme.headline5),
-                const SizedBox(height: 10),
-                Text("Please add todo", style: Theme.of(context).textTheme.caption),
-              ],
-            )
-          ) : (
-            ListView.builder(
-              itemCount: data.todos.length,
-              itemBuilder: (BuildContext context, int position) {
-                Todo todo = data.todos[position];
-
-                return TodoCard(
-                  todo: todo, 
-                  key: Key(todo.id),
-                  onTap: (todo) {
-                    data.finish(todo.id);
-                  },
-                  onTapDelete: (todo) {
-                    data.delete(todo.id);
-                  },
-                  onTapUpdate: (todo) {
-                    print("Select ${todo.id}");
-                  },
-                );
-              }
-            )
-          );
+          return data ? const TodoEmptyState() : const TodoList();
         },
+        selector: (context, data) => data.todos.isEmpty,
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
