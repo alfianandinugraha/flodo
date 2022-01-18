@@ -15,25 +15,36 @@ class Home extends StatelessWidget {
       title: "Todo",
       body: Consumer<TodoProvider>(
         builder: (context, data, widget) {
-          return ListView.builder(
-            itemCount: data.todos.length,
-            itemBuilder: (BuildContext context, int position) {
-              Todo todo = data.todos[position];
+          return data.todos.isEmpty ? (
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("Todo not found", style: Theme.of(context).textTheme.headline5),
+                const SizedBox(height: 10),
+                Text("Please add todo", style: Theme.of(context).textTheme.caption),
+              ],
+            )
+          ) : (
+            ListView.builder(
+              itemCount: data.todos.length,
+              itemBuilder: (BuildContext context, int position) {
+                Todo todo = data.todos[position];
 
-              return TodoCard(
-                todo: todo, 
-                key: Key(todo.id),
-                onTap: (todo) {
-                  data.finish(todo.id);
-                },
-                onTapDelete: (todo) {
-                  data.delete(todo.id);
-                },
-                onTapUpdate: (todo) {
-                  print("Select ${todo.id}");
-                },
-              );
-            }
+                return TodoCard(
+                  todo: todo, 
+                  key: Key(todo.id),
+                  onTap: (todo) {
+                    data.finish(todo.id);
+                  },
+                  onTapDelete: (todo) {
+                    data.delete(todo.id);
+                  },
+                  onTapUpdate: (todo) {
+                    print("Select ${todo.id}");
+                  },
+                );
+              }
+            )
           );
         },
       ),
