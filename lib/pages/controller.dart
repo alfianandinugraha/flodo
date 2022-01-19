@@ -16,6 +16,12 @@ class Controller extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String title = mode == ControllerMode.add ? "Add Todo" : "Update Todo";
+    final args = ModalRoute.of(context)!.settings.arguments;
+    Todo? initialTodo;
+
+    if (args is Todo) {
+      initialTodo = args;
+    }
 
     return BaseLayout(
       title: title, 
@@ -25,8 +31,14 @@ class Controller extends StatelessWidget {
           if (mode == ControllerMode.add) {
             context.read<TodoProvider>().add(todo);
           }
+
+          if (mode == ControllerMode.update && initialTodo != null) {
+            context.read<TodoProvider>().update(initialTodo.id, todo);
+          }
+
           Navigator.pop(context);
         },
+        initialTodo: initialTodo,
       )
     );
   }
