@@ -26,7 +26,11 @@ class TodoList extends StatelessWidget {
                 data.delete(todo.id);
               },
               onTapUpdate: (todo) {
-                print("Select ${todo.id}");
+                Navigator.pushNamed(
+                  context, 
+                  '/update',
+                  arguments: todo
+                );
               },
             );
           }
