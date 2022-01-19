@@ -7,7 +7,7 @@ class Todo {
 
   bool isFinish = false;
 
-  Todo({required this.name}) {
+  Todo({required this.name, this.isFinish = false}) {
     id = nanoid();
   }
 
