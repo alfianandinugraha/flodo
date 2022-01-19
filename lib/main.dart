@@ -35,7 +35,8 @@ class App extends StatelessWidget {
       ),
       home: const Home(),
       routes: {
-        "/add": (BuildContext context) => const Controller(mode: ControllerMode.add)
+        "/add": (BuildContext context) => const Controller(mode: ControllerMode.add),
+        "/update": (BuildContext context) => const Controller(mode: ControllerMode.update),
       },
     );
   }
