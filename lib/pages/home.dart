@@ -1,7 +1,5 @@
 import 'package:flodo/layouts/base_layout.dart';
-import 'package:flodo/models/todo.dart';
 import 'package:flodo/providers/todo_provider.dart';
-import 'package:flodo/widgets/todo_card.dart';
 import 'package:flodo/widgets/todo_empty_state.dart';
 import 'package:flodo/widgets/todo_list.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +12,7 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
 
     return BaseLayout(
-      title: "Todo",
+      title: "Flodo",
       body: Selector<TodoProvider, bool>(
         builder: (context, data, widget) {
           return data ? const TodoEmptyState() : const TodoList();

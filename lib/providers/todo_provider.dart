@@ -2,7 +2,7 @@ import 'package:flodo/models/todo.dart';
 import 'package:flutter/material.dart';
 
 class TodoProvider extends ChangeNotifier {
-  List<Todo> _todos = [Todo(name: "Buy milk"), Todo(name: "Reading book")];
+  List<Todo> _todos = [];
 
   List<Todo> get todos => _todos;
 

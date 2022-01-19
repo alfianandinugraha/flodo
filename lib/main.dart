@@ -1,4 +1,3 @@
-import 'package:flodo/models/todo.dart';
 import 'package:flodo/pages/controller.dart';
 import 'package:flodo/pages/home.dart';
 import 'package:flodo/providers/todo_provider.dart';
