@@ -1,6 +1,7 @@
 import 'package:flodo/pages/form_page.dart';
 import 'package:flodo/pages/home_page.dart';
 import 'package:flodo/pages/settings_page.dart';
+import 'package:flodo/providers/theme_mode_provider.dart';
 import 'package:flodo/providers/todo_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +17,8 @@ class Wrapper extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (BuildContext context) => TodoProvider())
+        ChangeNotifierProvider(create: (BuildContext context) => TodoProvider()),
+        ChangeNotifierProvider(create: (BuildContext context) => ThemeModeProvider())
       ],
       child: const App(),
     );
@@ -28,8 +30,11 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       title: 'Flutter Demo',
+      themeMode: context.select<ThemeModeProvider, ThemeMode>((value) => value.current),
+      darkTheme: ThemeData.dark(),
       theme: ThemeData(
         primarySwatch: Colors.blue,
         fontFamily: 'OpenSans',
