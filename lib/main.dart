@@ -31,6 +31,12 @@ class App extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        fontFamily: 'OpenSans',
+        textTheme: const TextTheme(
+          headline5: TextStyle(
+            fontWeight: FontWeight.w700,
+          )
+        )
       ),
       home: const Home(),
       routes: {
