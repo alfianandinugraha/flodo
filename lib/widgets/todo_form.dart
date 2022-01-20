@@ -1,9 +1,9 @@
 import 'package:flodo/models/todo.dart';
-import 'package:flodo/pages/controller.dart';
+import 'package:flodo/pages/form_page.dart';
 import 'package:flutter/material.dart';
 
 class TodoForm extends StatefulWidget {
-  final ControllerMode mode;
+  final FormPageMode mode;
   final Function(Todo) onSubmit;
   final Todo? initialTodo;
 
@@ -34,7 +34,7 @@ class TodoFormState extends State<TodoForm> {
 
   @override
   Widget build(BuildContext context) {
-    String buttonText = widget.mode == ControllerMode.add ? "Add Todo" : "Update Todo";
+    String buttonText = widget.mode == FormPageMode.add ? "Add Todo" : "Update Todo";
 
     return Form(
       key: _formKey,

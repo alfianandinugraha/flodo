@@ -5,17 +5,17 @@ import 'package:flodo/widgets/todo_form.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
-enum ControllerMode { add, update }
+enum FormPageMode { add, update }
 
 /// Controller page for update or add todo
-class Controller extends StatelessWidget {
-  final ControllerMode mode;
+class FormPage extends StatelessWidget {
+  final FormPageMode mode;
 
-  const Controller({Key? key, required this.mode}): super(key: key);
+  const FormPage({Key? key, required this.mode}): super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String title = mode == ControllerMode.add ? "Add Todo" : "Update Todo";
+    String title = mode == FormPageMode.add ? "Add Todo" : "Update Todo";
     final args = ModalRoute.of(context)!.settings.arguments;
     Todo? initialTodo;
 
@@ -28,11 +28,11 @@ class Controller extends StatelessWidget {
       body: TodoForm(
         mode: mode,
         onSubmit: (todo) {
-          if (mode == ControllerMode.add) {
+          if (mode == FormPageMode.add) {
             context.read<TodoProvider>().add(todo);
           }
 
-          if (mode == ControllerMode.update && initialTodo != null) {
+          if (mode == FormPageMode.update && initialTodo != null) {
             context.read<TodoProvider>().update(initialTodo.id, todo);
           }
 
