@@ -1,5 +1,6 @@
 import 'package:flodo/pages/controller.dart';
 import 'package:flodo/pages/home.dart';
+import 'package:flodo/pages/settings.dart';
 import 'package:flodo/providers/todo_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -42,6 +43,7 @@ class App extends StatelessWidget {
       routes: {
         "/add": (BuildContext context) => const Controller(mode: ControllerMode.add),
         "/update": (BuildContext context) => const Controller(mode: ControllerMode.update),
+        '/settings': (BuildContext context) => const SettingsPage()
       },
     );
   }
