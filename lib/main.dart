@@ -35,15 +35,7 @@ class App extends StatelessWidget {
       title: 'Flutter Demo',
       themeMode: context.select<ThemeModeProvider, ThemeMode>((value) => value.current),
       darkTheme: ThemeData.dark(),
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        fontFamily: 'OpenSans',
-        textTheme: const TextTheme(
-          headline5: TextStyle(
-            fontWeight: FontWeight.w700,
-          )
-        )
-      ),
+      theme: ThemeData.light(),
       home: const HomePage(),
       routes: {
         "/add": (BuildContext context) => const FormPage(mode: FormPageMode.add),
