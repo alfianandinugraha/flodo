@@ -1,4 +1,6 @@
 import 'package:flodo/models/todo.dart';
+import 'package:flodo/providers/theme_mode_provider.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
 class TodoCard extends StatelessWidget {
@@ -23,7 +25,13 @@ class TodoCard extends StatelessWidget {
       },
       child: Card(
         margin: const EdgeInsets.only(bottom: 16),
-        color: todo.isFinish ? Colors.grey[350] : Colors.white,
+        color: context.select<ThemeModeProvider, Color?>((value) {
+          if (value.isDark) {
+            return todo.isFinish ? Colors.grey[800] : Colors.grey[600];
+          }
+
+          return todo.isFinish ? Colors.grey[350] : Colors.white;
+        }),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
