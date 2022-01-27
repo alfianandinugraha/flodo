@@ -40,7 +40,14 @@ class TodoCard extends StatelessWidget {
               Text(
                 todo.name,
                 style: TextStyle(
-                  decoration: todo.isFinish ? TextDecoration.lineThrough : TextDecoration.none
+                  decoration: todo.isFinish ? TextDecoration.lineThrough : TextDecoration.none,
+                  color: context.select<ThemeModeProvider, Color?>((value) {
+                    if (value.isDark) {
+                      return todo.isFinish ? Colors.white54 : Colors.white;
+                    }
+
+                    return Colors.black;
+                  })
                 ),
               ),
               DropdownButtonHideUnderline(
