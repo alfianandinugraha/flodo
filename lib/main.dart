@@ -3,6 +3,7 @@ import 'package:flodo/pages/home_page.dart';
 import 'package:flodo/pages/settings_page.dart';
 import 'package:flodo/providers/theme_mode_provider.dart';
 import 'package:flodo/providers/todo_provider.dart';
+import 'package:flodo/themes/base_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -34,8 +35,8 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       themeMode: context.select<ThemeModeProvider, ThemeMode>((value) => value.current),
-      darkTheme: ThemeData.dark(),
-      theme: ThemeData.light(),
+      darkTheme: BaseTheme.dark(),
+      theme: BaseTheme.get(),
       home: const HomePage(),
       routes: {
         "/add": (BuildContext context) => const FormPage(mode: FormPageMode.add),
